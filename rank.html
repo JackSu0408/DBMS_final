@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#162013] dark group/design-root overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#2e4328] px-10 py-3">
+          <div class="flex items-center gap-4 text-white">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">人生就RPG</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-white text-sm font-medium leading-normal" href="#">主页</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">任务</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">挑战</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">商城</a>
+            </div>
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 bg-[#2e4328] text-white gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
+            >
+              <div class="text-white" data-icon="Bell" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
+                  ></path>
+                </svg>
+              </div>
+            </button>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJxTInH4ZWIl4dFJy1fC9etUgAzA2U19bthPHxoo8q6S_Qz2Zf3EGCjGDMva4PKOSFBAWUoSgAf-_J0QPk6i30a1bL1GhCaYy6lJiJ_LLNcE6ikd1MuUUat1gCKyWxiI_M6Amt7DQdkvprjorGLWqPJj4O1tsTwvWpa_xPIhbOOCOuqVtOlLDXA4EQlLktWB9hLxsjFrJvjhewdKHVq1DIbZs_pSdk1KHRfsQVu-GsuiyuNHjCOpCuGSy-BVI-sq6LaD0b6Qe8G7nE");'
+            ></div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-white tracking-light text-[32px] font-bold leading-tight min-w-72">挑战排行榜</p></div>
+            <div class="px-4 py-3 @container">
+              <div class="flex overflow-hidden rounded-xl border border-[#426039] bg-[#162013]">
+                <table class="flex-1">
+                  <thead>
+                    <tr class="bg-[#21301c]">
+                      <th class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">排名</th>
+                      <th class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">用户</th>
+                      <th class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">经验值</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">1</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">张三</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">10000</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">2</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">李四</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">9500</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">3</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">王五</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">9000</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">4</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">赵六</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">8500</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">5</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">孙七</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">8000</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">6</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">周八</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">7500</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">7</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">吴九</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">7000</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">8</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">郑十</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">6500</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">9</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">陈十一</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">6000</td>
+                    </tr>
+                    <tr class="border-t border-t-[#426039]">
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">10</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">杨十二</td>
+                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">5500</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <style>
+                          @container(max-width:120px){.table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120{display: none;}}
+                @container(max-width:240px){.table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240{display: none;}}
+                @container(max-width:360px){.table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360{display: none;}}
+              </style>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
