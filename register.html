@@ -12,53 +12,72 @@
 </head>
 
 <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-[#171f14] dark group/design-root overflow-x-hidden"
+    <div class="relative flex size-full min-h-screen flex-col bg-[#000000] dark group/design-root overflow-x-hidden"
         style='font-family: Manrope, "Noto Sans", sans-serif;'>
         <div class="layout-container flex h-full grow flex-col">
-            <div id="header"></div>
-            <script>
-                fetch('header.html')
-                    .then(response => response.text())
-                    .then(data => document.getElementById('header').innerHTML = data);
-            </script>
-            <div class="px-40 flex flex-1 justify-center py-5">
-                <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
+            <header class="flex items-center justify-center border-b border-solid border-b-[#2e4328] px-10 py-3">
+                <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Life is an RPG</h2>
+            </header>
+
+            <div class="flex flex-1 justify-center items-center py-5">
+                <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5">
                     <h2
                         class="text-white tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">
                         Sign up</h2>
-                    <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <input placeholder="User Name"
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#2f402b] focus:border-none h-14 placeholder:text-[#a4be9d] p-4 text-base font-normal leading-normal"
-                                value="" />
-                        </label>
-                    </div>
-                    <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <input placeholder="User Email"
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#2f402b] focus:border-none h-14 placeholder:text-[#a4be9d] p-4 text-base font-normal leading-normal"
-                                value="" />
-                        </label>
-                    </div>
-                    <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <input placeholder="User Password"
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#2f402b] focus:border-none h-14 placeholder:text-[#a4be9d] p-4 text-base font-normal leading-normal"
-                                value="" />
-                        </label>
-                    </div>
-                    <div class="flex px-4 py-3">
-                        <button
-                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#8cd279] text-[#171f14] text-sm font-bold leading-normal tracking-[0.015em]">
-                            <span class="truncate">Sign Up</span>
-                        </button>
-                    </div>
-                    <p class="text-[#a4be9d] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">
-                        Already have an account? Log in</p>
+
+                    <!-- 顯示錯誤訊息 -->
+                    <div id="error-message" class="mx-4 mb-4 p-3 bg-red-500 text-white rounded-lg"
+                        style="display: none;"></div>
+
+                    <form method="POST" action="register_process.php">
+                        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                            <label class="flex flex-col min-w-40 flex-1">
+                                <input name="username" placeholder="User Name" required
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#2f402b] focus:border-none h-14 placeholder:text-[#a4be9d] p-4 text-base font-normal leading-normal"
+                                    value="" />
+                            </label>
+                        </div>
+                        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                            <label class="flex flex-col min-w-40 flex-1">
+                                <input name="email" type="email" placeholder="User Email" required
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#2f402b] focus:border-none h-14 placeholder:text-[#a4be9d] p-4 text-base font-normal leading-normal"
+                                    value="" />
+                            </label>
+                        </div>
+                        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                            <label class="flex flex-col min-w-40 flex-1">
+                                <input name="password" type="password" placeholder="User Password" required
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border-none bg-[#2f402b] focus:border-none h-14 placeholder:text-[#a4be9d] p-4 text-base font-normal leading-normal"
+                                    value="" /> </label>
+                        </div>
+                        <div class="flex px-4 py-3 mt-10">
+                            <button type="submit"
+                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#8cd279] text-[#171f14] text-sm font-bold leading-normal tracking-[0.015em]">
+                                <span class="truncate">Sign Up</span>
+                            </button>
+                        </div>
+                    </form>
+                    <a href="index.html">
+                        <p
+                            class="text-[#a4be9d] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">
+                            Already have an account? Log in</p>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // 檢查 URL 中是否有錯誤訊息
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if (error) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = decodeURIComponent(error);
+            errorDiv.style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>

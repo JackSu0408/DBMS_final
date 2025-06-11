@@ -1,0 +1,66 @@
+<?php
+// 引入資料庫連線設定
+require_once 'db_config.php';
+
+// 處理註冊表單提交
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user_name = trim($_POST['username']);
+    $user_email = trim($_POST['email']);
+    $user_password = $_POST['password'];
+    
+    // 驗證資料
+    $errors = [];
+    
+    if (empty($user_name)) {
+        $errors[] = "使用者名稱不能為空";
+    }
+    
+    if (empty($user_email)) {
+        $errors[] = "電子郵件不能為空";
+    } elseif (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "電子郵件格式不正確";
+    }
+    
+    if (empty($user_password)) {
+        $errors[] = "密碼不能為空";
+    } elseif (strlen($user_password) < 6) {
+        $errors[] = "密碼長度至少需要6個字元";
+    }
+    
+    // 檢查電子郵件是否已存在
+    if (empty($errors)) {
+        $check_email = $pdo->prepare("SELECT COUNT(*) FROM USER WHERE UEMAIL = ?");
+        $check_email->execute([$user_email]);
+        
+        if ($check_email->fetchColumn() > 0) {
+            $errors[] = "此電子郵件已被註冊";
+        }
+    }
+    
+    // 如果沒有錯誤，進行註冊
+    if (empty($errors)) {
+        // 加鹽並加密密碼
+        $salt = bin2hex(random_bytes(16)); // 產生隨機鹽值
+        $hashed_password = hash('sha256', $user_password . $salt);
+        
+        try {
+            $stmt = $pdo->prepare("INSERT INTO USER (UUSERNAME, UEMAIL, UPASSWORD) VALUES (?, ?, ?)");
+            $stmt->execute([$user_name, $user_email, $salt . ':' . $hashed_password]);
+            
+            // 註冊成功，重導向到登入頁面
+            header("Location: index.html?success=1");
+            exit();
+            
+        } catch(PDOException $e) {
+            $errors[] = "註冊失敗: " . $e->getMessage();
+        }
+    }
+    
+    // 如果有錯誤，重導向回註冊頁面並顯示錯誤
+    if (!empty($errors)) {
+        $error_message = implode(", ", $errors);
+        header("Location: register.html?error=" . urlencode($error_message));
+        exit();
+    }
+}
+?>
