@@ -25,19 +25,26 @@
       .then(response => response.text())
       .then(data => document.getElementById('header').innerHTML = data);
   </script>
-        <div class="px-40 flex flex-1 justify-center py-5">
+  <div class="px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-white tracking-light text-[32px] font-bold leading-tight min-w-72">Daily Missions</p></div>
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p class="text-white tracking-light text-[32px] font-bold leading-tight min-w-72">Daily Missions</p>
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#2e4328] text-white text-sm font-medium leading-normal"
+              >
+                <span class="truncate">Create Mission</span>
+              </button>
+            </div>
             <div class="flex items-center gap-4 bg-[#162013] px-4 min-h-[72px] py-2 justify-between">
               <div class="flex flex-col justify-center">
                 <p class="text-white text-base font-medium leading-normal line-clamp-1">Complete 5000 steps</p>
-                <p class="text-[#a2c398] text-sm font-normal leading-normal line-clamp-2">Easy</p>
+                <p class="text-[#a1c398] text-sm font-normal leading-normal line-clamp-2">Easy</p>
               </div>
               <div class="shrink-0">
                 <div class="flex size-7 items-center justify-center">
                   <input
                     type="checkbox"
-                    class="h-5 w-5 rounded border-[#426039] border-2 bg-transparent text-[#53d22c] checked:bg-[#53d22c] checked:border-[#53d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#426039] focus:outline-none"
+                    class="h-5 w-5 rounded border-[#416039] border-2 bg-transparent text-[#50d22c] checked:bg-[#50d22c] checked:border-[#50d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#416039] focus:outline-none"
                   />
                 </div>
               </div>
@@ -45,13 +52,13 @@
             <div class="flex items-center gap-4 bg-[#162013] px-4 min-h-[72px] py-2 justify-between">
               <div class="flex flex-col justify-center">
                 <p class="text-white text-base font-medium leading-normal line-clamp-1">Read for 30 minutes</p>
-                <p class="text-[#a2c398] text-sm font-normal leading-normal line-clamp-2">Medium</p>
+                <p class="text-[#a1c398] text-sm font-normal leading-normal line-clamp-2">Medium</p>
               </div>
               <div class="shrink-0">
                 <div class="flex size-7 items-center justify-center">
                   <input
                     type="checkbox"
-                    class="h-5 w-5 rounded border-[#426039] border-2 bg-transparent text-[#53d22c] checked:bg-[#53d22c] checked:border-[#53d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#426039] focus:outline-none"
+                    class="h-5 w-5 rounded border-[#416039] border-2 bg-transparent text-[#50d22c] checked:bg-[#50d22c] checked:border-[#50d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#416039] focus:outline-none"
                   />
                 </div>
               </div>
@@ -59,13 +66,13 @@
             <div class="flex items-center gap-4 bg-[#162013] px-4 min-h-[72px] py-2 justify-between">
               <div class="flex flex-col justify-center">
                 <p class="text-white text-base font-medium leading-normal line-clamp-1">Learn a new skill for 1 hour</p>
-                <p class="text-[#a2c398] text-sm font-normal leading-normal line-clamp-2">Hard</p>
+                <p class="text-[#a1c398] text-sm font-normal leading-normal line-clamp-2">Hard</p>
               </div>
               <div class="shrink-0">
                 <div class="flex size-7 items-center justify-center">
                   <input
                     type="checkbox"
-                    class="h-5 w-5 rounded border-[#426039] border-2 bg-transparent text-[#53d22c] checked:bg-[#53d22c] checked:border-[#53d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#426039] focus:outline-none"
+                    class="h-5 w-5 rounded border-[#416039] border-2 bg-transparent text-[#50d22c] checked:bg-[#50d22c] checked:border-[#50d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#416039] focus:outline-none"
                   />
                 </div>
               </div>
@@ -73,13 +80,13 @@
             <div class="flex items-center gap-4 bg-[#162013] px-4 min-h-[72px] py-2 justify-between">
               <div class="flex flex-col justify-center">
                 <p class="text-white text-base font-medium leading-normal line-clamp-1">Meditate for 15 minutes</p>
-                <p class="text-[#a2c398] text-sm font-normal leading-normal line-clamp-2">Easy</p>
+                <p class="text-[#a1c398] text-sm font-normal leading-normal line-clamp-2">Easy</p>
               </div>
               <div class="shrink-0">
                 <div class="flex size-7 items-center justify-center">
                   <input
                     type="checkbox"
-                    class="h-5 w-5 rounded border-[#426039] border-2 bg-transparent text-[#53d22c] checked:bg-[#53d22c] checked:border-[#53d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#426039] focus:outline-none"
+                    class="h-5 w-5 rounded border-[#416039] border-2 bg-transparent text-[#50d22c] checked:bg-[#50d22c] checked:border-[#50d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#416039] focus:outline-none"
                   />
                 </div>
               </div>
@@ -87,13 +94,13 @@
             <div class="flex items-center gap-4 bg-[#162013] px-4 min-h-[72px] py-2 justify-between">
               <div class="flex flex-col justify-center">
                 <p class="text-white text-base font-medium leading-normal line-clamp-1">Write in your journal</p>
-                <p class="text-[#a2c398] text-sm font-normal leading-normal line-clamp-2">Medium</p>
+                <p class="text-[#a1c398] text-sm font-normal leading-normal line-clamp-2">Medium</p>
               </div>
               <div class="shrink-0">
                 <div class="flex size-7 items-center justify-center">
                   <input
                     type="checkbox"
-                    class="h-5 w-5 rounded border-[#426039] border-2 bg-transparent text-[#53d22c] checked:bg-[#53d22c] checked:border-[#53d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#426039] focus:outline-none"
+                    class="h-5 w-5 rounded border-[#416039] border-2 bg-transparent text-[#50d22c] checked:bg-[#50d22c] checked:border-[#50d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#416039] focus:outline-none"
                   />
                 </div>
               </div>
@@ -101,13 +108,13 @@
             <div class="flex items-center gap-4 bg-[#162013] px-4 min-h-[72px] py-2 justify-between">
               <div class="flex flex-col justify-center">
                 <p class="text-white text-base font-medium leading-normal line-clamp-1">Complete a coding challenge</p>
-                <p class="text-[#a2c398] text-sm font-normal leading-normal line-clamp-2">Hard</p>
+                <p class="text-[#a1c398] text-sm font-normal leading-normal line-clamp-2">Hard</p>
               </div>
               <div class="shrink-0">
                 <div class="flex size-7 items-center justify-center">
                   <input
                     type="checkbox"
-                    class="h-5 w-5 rounded border-[#426039] border-2 bg-transparent text-[#53d22c] checked:bg-[#53d22c] checked:border-[#53d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#426039] focus:outline-none"
+                    class="h-5 w-5 rounded border-[#416039] border-2 bg-transparent text-[#50d22c] checked:bg-[#50d22c] checked:border-[#50d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#416039] focus:outline-none"
                   />
                 </div>
               </div>
