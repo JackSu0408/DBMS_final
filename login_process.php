@@ -1,4 +1,6 @@
 <?php
+// filepath: c:\xampp\htdocs\DBMS_final\login_process.php
+header('Content-Type: text/html; charset=utf-8');
 // 開啟 session
 session_start();
 

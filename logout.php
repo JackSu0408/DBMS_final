@@ -10,12 +10,8 @@ error_log("User ID before logout: " . (isset($_SESSION['user_id']) ? $_SESSION['
 $_SESSION = array();
 
 // If it's desired to kill the session cookie, also delete the session cookie
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
-    );
+if (isset($_COOKIE[session_name()])) {
+    setcookie(session_name(), '', time()-3600, '/');
 }
 
 // Finally, destroy the session

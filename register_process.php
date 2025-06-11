@@ -1,4 +1,9 @@
 <?php
+// filepath: c:\xampp\htdocs\DBMS_final\register_process.php
+// 設定編碼和啟動 session
+header('Content-Type: text/html; charset=utf-8');
+session_start();
+
 // 引入資料庫連線設定
 require_once 'db_config.php';
 
@@ -34,7 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (empty($user_name)) {
         $errors[] = "使用者名稱不能為空";
-    }      if (empty($user_email)) {
+    }
+    
+    if (empty($user_email)) {
         $errors[] = "電子郵件不能為空";
     } elseif (!isValidEmail($user_email)) {
         $errors[] = "電子郵件格式錯誤或網域不被接受。僅接受 gmail.com, yahoo.com.tw, hotmail.com, outlook.com";
@@ -56,6 +63,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     
+    // 檢查用戶名是否已存在
+    if (empty($errors)) {
+        $check_username = $pdo->prepare("SELECT COUNT(*) FROM USER WHERE UUSERNAME = ?");
+        $check_username->execute([$user_name]);
+        
+        if ($check_username->fetchColumn() > 0) {
+            $errors[] = "此用戶名已被使用";
+        }
+    }
+    
     // 如果沒有錯誤，進行註冊
     if (empty($errors)) {
         // 加鹽並加密密碼
@@ -63,15 +80,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashed_password = hash('sha256', $user_password . $salt);
         
         try {
-            $stmt = $pdo->prepare("INSERT INTO USER (UUSERNAME, UEMAIL, UPASSWORD) VALUES (?, ?, ?)");
+            // 插入新用戶，包含預設的經驗值和等級
+            $stmt = $pdo->prepare("INSERT INTO USER (UUSERNAME, UEMAIL, UPASSWORD, UEXP, ULEVEL, UCREATED_AT) VALUES (?, ?, ?, 0, 0, NOW())");
             $stmt->execute([$user_name, $user_email, $salt . ':' . $hashed_password]);
             
-            // 註冊成功，重導向到登入頁面
-            header("Location: Home.html?success=1");
+            // 取得新插入用戶的 ID
+            $new_user_id = $pdo->lastInsertId();
+            
+            // 清除任何現有的 session 資料
+            $_SESSION = array();
+            
+            // 設定新用戶的 session 資料
+            $_SESSION['logged_in'] = true;
+            $_SESSION['user_id'] = $new_user_id;
+            $_SESSION['username'] = $user_name;
+            $_SESSION['email'] = $user_email;
+            
+            // 重新生成 session ID 以防止 session 劫持
+            session_regenerate_id(true);
+            
+            // 註冊成功，重導向到 Home 頁面（現在已經自動登入）
+            header("Location: Home.html?welcome=1");
             exit();
             
         } catch(PDOException $e) {
-            $errors[] = "註冊失敗: " . $e->getMessage();
+            error_log('Registration error: ' . $e->getMessage());
+            $errors[] = "註冊失敗，請稍後再試";
         }
     }
     

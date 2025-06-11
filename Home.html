@@ -52,7 +52,7 @@
                                     <p id="exp-percentage" class="text-[#a2c398] text-sm font-normal">0%</p>
                                     
                                     <!-- 測試按鈕 - 增加經驗值 -->
-                                    <div class="flex gap-2 mt-4">
+                                    <!-- <div class="flex gap-2 mt-4">
                                         <button onclick="addExp(100)" class="bg-[#53d22c] text-[#0f1a0d] px-4 py-2 rounded-lg font-semibold hover:bg-[#8cd279] transition-colors">
                                             +100 EXP
                                         </button>
@@ -66,7 +66,7 @@
                                         <button onclick="testDatabase()" class="bg-[#a66b2a] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#d4823d] transition-colors">
                                             測試資料庫
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>                    </div>
@@ -75,7 +75,7 @@
                     <div id="titles-container" class="flex gap-3 p-3 flex-wrap pr-4">
                         <p class="text-[#a2c398] text-sm">載入中...</p>
                     </div>
-                    <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Stats
+                    <!-- <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Stats
                     </h2>                    <div class="flex flex-wrap gap-3 px-4 py-3">
                         <div
                             class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
@@ -96,7 +96,7 @@
                             <div class="flex items-center gap-2">
                                 <p class="text-[#a2c398] text-sm font-normal leading-normal">Days Active</p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>        </div>
@@ -148,10 +148,10 @@
                             titlesContainer.innerHTML = '<p class="text-[#a2c398] text-sm">尚未獲得任何稱號</p>';
                         }
                         
-                        // 更新統計資料
-                        document.getElementById('missions-completed').textContent = user.missions_completed;
-                        document.getElementById('total-missions').textContent = user.total_missions;
-                        document.getElementById('days-active').textContent = user.days_active;
+                        // // 更新統計資料
+                        // document.getElementById('missions-completed').textContent = user.missions_completed;
+                        // document.getElementById('total-missions').textContent = user.total_missions;
+                        // document.getElementById('days-active').textContent = user.days_active;
                         
                         console.log('用戶資訊載入成功:', user);                    } else {
                         console.error('載入用戶資訊失敗:', data);
