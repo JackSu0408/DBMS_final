@@ -9,8 +9,7 @@
       onload="this.rel='stylesheet'"
       href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
     />
-
-    <title>Stitch Design</title>
+    <title>Life is an RPG</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -26,80 +25,113 @@
   </script>
         <div class="px-40 flex flex-1 justify-center py-5">
           <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-white tracking-light text-[32px] font-bold leading-tight min-w-72">挑战排行榜</p></div>
+            <div class="flex flex-wrap justify-between gap-3 p-4"><p class="text-white tracking-light text-[32px] font-bold leading-tight min-w-72">挑戰排行榜</p></div>
             <div class="px-4 py-3 @container">
               <div class="flex overflow-hidden rounded-xl border border-[#426039] bg-[#162013]">
-                <table class="flex-1">
-                  <thead>
+                <table class="flex-1">                  <thead>
                     <tr class="bg-[#21301c]">
-                      <th class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">排名</th>
-                      <th class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">用户</th>
-                      <th class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">经验值</th>
+                      <th class="px-4 py-3 text-left text-white w-[100px] text-sm font-medium leading-normal">排名</th>
+                      <th class="px-4 py-3 text-left text-white w-[300px] text-sm font-medium leading-normal">用戶</th>
+                      <th class="px-4 py-3 text-left text-white w-[150px] text-sm font-medium leading-normal">等級稱號</th>
+                      <th class="px-4 py-3 text-left text-white w-[120px] text-sm font-medium leading-normal">經驗值</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">1</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">张三</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">10000</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">2</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">李四</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">9500</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">3</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">王五</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">9000</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">4</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">赵六</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">8500</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">5</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">孙七</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">8000</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">6</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">周八</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">7500</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">7</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">吴九</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">7000</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">8</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">郑十</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">6500</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">9</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">陈十一</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">6000</td>
-                    </tr>
-                    <tr class="border-t border-t-[#426039]">
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">10</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">杨十二</td>
-                      <td class="table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360 h-[72px] px-4 py-2 w-[400px] text-[#a2c398] text-sm font-normal leading-normal">5500</td>
+                  <tbody id="rankings-tbody">
+                    <!-- 排行榜資料將通過 JavaScript 動態載入 -->
+                    <tr>
+                      <td colspan="4" class="px-4 py-8 text-center text-white">載入中...</td>
                     </tr>
                   </tbody>
-                </table>
-              </div>
-              <style>
-                          @container(max-width:120px){.table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-120{display: none;}}
-                @container(max-width:240px){.table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-240{display: none;}}
-                @container(max-width:360px){.table-134f5f3b-3175-4225-8d1e-a4a0aa099a07-column-360{display: none;}}
-              </style>
+                </table>              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div>    <script>
+      // 測試 Web 服務器連接
+      function testServer() {
+        fetch('test.php')
+          .then(response => {
+            console.log('Test server response:', response.status);
+            return response.json();
+          })
+          .then(data => {
+            console.log('Test server data:', data);
+          })
+          .catch(error => {
+            console.error('Test server error:', error);
+          });
+      }
+
+      // 載入排行榜資料
+      function loadRankings() {
+        console.log('正在載入排行榜...');
+        console.log('當前 URL:', window.location.href);
+        
+        // 先測試服務器
+        testServer();
+        
+        fetch('get_rankings.php')
+          .then(response => {
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text(); // 先用 text() 來查看原始回應
+          })
+          .then(text => {
+            console.log('Raw response:', text);
+            try {
+              const data = JSON.parse(text);
+              console.log('排行榜資料:', data);
+              
+              const tbody = document.getElementById('rankings-tbody');
+              
+              if (data.success && data.rankings && data.rankings.length > 0) {
+                tbody.innerHTML = '';
+                
+                data.rankings.forEach((user, index) => {
+                  const row = document.createElement('tr');
+                  row.className = 'border-t border-t-[#426039]';
+                  
+                  // 根據排名設定不同的顏色
+                  let rankColor = 'text-[#a2c398]';
+                  if (user.rank === 1) rankColor = 'text-yellow-400'; // 金色
+                  else if (user.rank === 2) rankColor = 'text-gray-300'; // 銀色
+                  else if (user.rank === 3) rankColor = 'text-orange-400'; // 銅色
+                  
+                  row.innerHTML = `
+                    <td class="h-[72px] px-4 py-2 w-[100px] ${rankColor} text-sm font-bold leading-normal">${user.rank}</td>
+                    <td class="h-[72px] px-4 py-2 w-[300px] text-white text-sm font-normal leading-normal">${user.UUSERNAME}</td>
+                    <td class="h-[72px] px-4 py-2 w-[150px] text-[#53d22c] text-xs font-normal leading-normal">${user.level_title}</td>
+                    <td class="h-[72px] px-4 py-2 w-[120px] ${rankColor} text-sm font-normal leading-normal">${user.UEXP.toLocaleString()}</td>
+                  `;
+                  
+                  tbody.appendChild(row);
+                });
+              } else {
+                tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-white">暫無排行榜資料</td></tr>';
+                console.log('No rankings data or unsuccessful response');
+              }
+            } catch (parseError) {
+              console.error('JSON parse error:', parseError);
+              console.log('Response that failed to parse:', text);
+              const tbody = document.getElementById('rankings-tbody');
+              tbody.innerHTML = `<tr><td colspan="4" class="px-4 py-8 text-center text-red-400">資料格式錯誤: ${parseError.message}</td></tr>`;
+            }
+          })
+          .catch(error => {
+            console.error('載入排行榜失敗:', error);
+            const tbody = document.getElementById('rankings-tbody');
+            tbody.innerHTML = `<tr><td colspan="4" class="px-4 py-8 text-center text-red-400">載入失敗: ${error.message}</td></tr>`;
+          });
+      }
+
+      // 頁面載入完成後載入排行榜
+      document.addEventListener('DOMContentLoaded', function() {
+        loadRankings();
+      });
+    </script>
   </body>
 </html>
