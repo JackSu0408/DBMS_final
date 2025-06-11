@@ -1,94 +1,100 @@
 <html>
-  <head>
+
+<head>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
-    />
+    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
 
     <title>Life's RPG</title>
     <link rel="icon" type="image/x-icon" href="source/icon.svg" />
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>  </head>
-  <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-[#000000] dark group/design-root overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
-      <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#2e4328] px-10 py-3">
-          <div class="flex items-center gap-4 text-white">
-            <div class="size-4">
-              <img viewBox="0 0 80 80" fill="none" src="source/icon.svg" alt="Logo" class="w-full h-full"/>
-            </div>
-            <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Life is an RPG</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <a class="text-white text-md font-medium leading-normal" href="#">Home</a>
-              <a class="text-white text-md font-medium leading-normal" href="#">Missions</a>
-              <a class="text-white text-md font-medium leading-normal" href="#">Profile</a>
-              <a class="text-white text-md font-medium leading-normal" href="#">Leaderboard</a>
-            </div>
-            <div
-              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOw9VsgnKVJMvQcLoN0oJZPuMhDErdwe3a9-Y69fXE8mY63yNwGklECTGeKZ1wCTcGw5fYbNL6Thl96U_lOkE9Hiez1hu5oa2C7WawXpo__-WjkzNZBLmM_X0a2bJXO-eHIvyQkF60elC0JoOuo5BLWpu21CwS5jIte-rcLCvUsZH3jRAj2FRbV5zkfOs0m5gCnER5_hWkcwkJvDh2jVFI4O0po4EwDQCnLRhaFjyGyYinhqFzWb85OUzjOKj1vmL-PromHXKgPjmR");'
-            ></div>
-          </div>
-        </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <div class="flex p-4 @container">
-              <div class="flex w-full flex-col gap-4 items-center">
-                <div class="flex gap-4 flex-col items-center">
-                  <div
-                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
-                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA54L7R7Y0gXUkQ8M70oiVYCX6ZKKnjERJUng08JX_7kR2r8Ojf9wFQYTbuFBYb2jK8pRHsEToU3hgxz3lpZwLALpikURh5qrk3GlxPlh-aKjbrC5d0ayQRguM2g9LAjsBSVEy0liB97lHNlDL3wnCgizI7_oChhVHTxTPaboUVXDNZoBUKpH09zcd16ciZ60SnpIV80NvjWPGkjwwcGzqB-ihgnRyqoJaKxErEkCJGUEYGFWUgVAHmyQbdZ1phs_7ievGiyehuAT5w");'
-                  ></div>
-                  <div class="flex flex-col items-center justify-center justify-center">
-                    <p class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">Sarah Chen</p>
-                    <p class="text-[#a2c398] text-base font-normal leading-normal text-center">Level 5 Adventurer</p>
-                    <p class="text-[#a2c398] text-base font-normal leading-normal text-center">1200 / 2000 XP</p>
-                  </div>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#000000] dark group/design-root overflow-x-hidden"
+        style='font-family: Manrope, "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <div id="header"></div>
+            <script>
+                fetch('header.html')
+                    .then(response => response.text())
+                    .then(data => document.getElementById('header').innerHTML = data);
+            </script>
+            <div class="px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                    <div class="flex p-4 @container">
+                        <div class="flex w-full flex-col gap-4 items-center">
+                            <div class="flex gap-4 flex-col items-center">
+                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA54L7R7Y0gXUkQ8M70oiVYCX6ZKKnjERJUng08JX_7kR2r8Ojf9wFQYTbuFBYb2jK8pRHsEToU3hgxz3lpZwLALpikURh5qrk3GlxPlh-aKjbrC5d0ayQRguM2g9LAjsBSVEy0liB97lHNlDL3wnCgizI7_oChhVHTxTPaboUVXDNZoBUKpH09zcd16ciZ60SnpIV80NvjWPGkjwwcGzqB-ihgnRyqoJaKxErEkCJGUEYGFWUgVAHmyQbdZ1phs_7ievGiyehuAT5w");'>
+                                </div>
+                                <div class="flex flex-col items-center justify-center justify-center">
+                                    <p
+                                        class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">
+                                        Sarah Chen</p>
+                                    <p class="text-[#a2c398] text-base font-normal leading-normal text-center">Level 5
+                                        Adventurer</p>
+                                    <p class="text-[#a2c398] text-base font-normal leading-normal text-center">1200 /
+                                        2000 XP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3 p-4">
+                        <div class="flex gap-6 justify-between">
+                            <p class="text-white text-base font-medium leading-normal">Monster Slaying Progress</p>
+                            <p class="text-white text-sm font-normal leading-normal">60%</p>
+                        </div>
+                        <div class="rounded bg-[#426039]">
+                            <div class="h-2 rounded bg-[#53d22c]" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Titles
+                        Earned</h2>
+                    <div class="flex gap-3 p-3 flex-wrap pr-4">
+                        <div
+                            class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
+                            <p class="text-white text-sm font-medium leading-normal">Dragon Slayer</p>
+                        </div>
+                        <div
+                            class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
+                            <p class="text-white text-sm font-medium leading-normal">Quest Master</p>
+                        </div>
+                        <div
+                            class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
+                            <p class="text-white text-sm font-medium leading-normal">Daily Hero</p>
+                        </div>
+                    </div>
+                    <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Stats
+                    </h2>
+                    <div class="flex flex-wrap gap-3 px-4 py-3">
+                        <div
+                            class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
+                            <p class="text-white tracking-light text-2xl font-bold leading-tight">50</p>
+                            <div class="flex items-center gap-2">
+                                <p class="text-[#a2c398] text-sm font-normal leading-normal">Missions Completed</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
+                            <p class="text-white tracking-light text-2xl font-bold leading-tight">20</p>
+                            <div class="flex items-center gap-2">
+                                <p class="text-[#a2c398] text-sm font-normal leading-normal">Quests Accepted</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
+                            <p class="text-white tracking-light text-2xl font-bold leading-tight">100</p>
+                            <div class="flex items-center gap-2">
+                                <p class="text-[#a2c398] text-sm font-normal leading-normal">Days Active</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="flex flex-col gap-3 p-4">
-              <div class="flex gap-6 justify-between">
-                <p class="text-white text-base font-medium leading-normal">Monster Slaying Progress</p>
-                <p class="text-white text-sm font-normal leading-normal">60%</p>
-              </div>
-              <div class="rounded bg-[#426039]"><div class="h-2 rounded bg-[#53d22c]" style="width: 60%;"></div></div>
-            </div>
-            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Titles Earned</h2>
-            <div class="flex gap-3 p-3 flex-wrap pr-4">
-              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
-                <p class="text-white text-sm font-medium leading-normal">Dragon Slayer</p>
-              </div>
-              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
-                <p class="text-white text-sm font-medium leading-normal">Quest Master</p>
-              </div>
-              <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
-                <p class="text-white text-sm font-medium leading-normal">Daily Hero</p>
-              </div>
-            </div>
-            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Stats</h2>
-            <div class="flex flex-wrap gap-3 px-4 py-3">
-              <div class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
-                <p class="text-white tracking-light text-2xl font-bold leading-tight">50</p>
-                <div class="flex items-center gap-2"><p class="text-[#a2c398] text-sm font-normal leading-normal">Missions Completed</p></div>
-              </div>
-              <div class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
-                <p class="text-white tracking-light text-2xl font-bold leading-tight">20</p>
-                <div class="flex items-center gap-2"><p class="text-[#a2c398] text-sm font-normal leading-normal">Quests Accepted</p></div>
-              </div>
-              <div class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
-                <p class="text-white tracking-light text-2xl font-bold leading-tight">100</p>
-                <div class="flex items-center gap-2"><p class="text-[#a2c398] text-sm font-normal leading-normal">Days Active</p></div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </body>
+</body>
+
 </html>
