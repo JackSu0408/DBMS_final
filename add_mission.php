@@ -5,36 +5,59 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// 資料庫連線設定
+session_start();
 require_once 'db_config.php';
 
 try {
+    // 檢查用戶是否已登入
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'error' => '請先登入']);
+        exit();
+    }
+
     // 檢查是否為 POST 請求
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         echo json_encode(['success' => false, 'error' => 'Only POST method allowed']);
         exit();
     }
 
+    $userId = $_SESSION['user_id'];
+    
     // 獲取表單資料
     $MCATEGORY = trim($_POST['MCATEGORY'] ?? '');
     $MDESCRIPTION = trim($_POST['MDESCRIPTION'] ?? '');
     $MDIFFICULT = trim($_POST['MDIFFICULT'] ?? '');
     $MGOAL_EXP = intval($_POST['MGOAL_EXP'] ?? 0);
-    $MGOAL_LEVEL = intval($_POST['MGOAL_LEVEL'] ?? 0);
 
     // 驗證必填欄位
-    if (empty($MCATEGORY) || empty($MDESCRIPTION) || empty($MDIFFICULT) || $MGOAL_EXP <= 0 || $MGOAL_LEVEL <= 0) {
-        echo json_encode(['success' => false, 'error' => 'All fields are required and numbers must be greater than 0']);
+    if (empty($MCATEGORY) || empty($MDESCRIPTION) || empty($MDIFFICULT) || $MGOAL_EXP <= 0) {
+        echo json_encode(['success' => false, 'error' => '所有欄位都是必填的，且數值必須大於0']);
         exit();
     }
 
-    // 準備 SQL 語句
-    $stmt = $pdo->prepare("INSERT INTO MISSION (MCATEGORY, MDESCRIPTION, MDIFFICULT, MGOAL_EXP, MGOAL_LEVEL, MCREATED_AT) VALUES (?, ?, ?, ?, ?, NOW())");
+    // 驗證難度與經驗值的對應關係
+    $validCombinations = [
+        'Easy' => 5,
+        'Medium' => 10,
+        'Hard' => 20
+    ];
+
+    if (!isset($validCombinations[$MDIFFICULT]) || $validCombinations[$MDIFFICULT] != $MGOAL_EXP) {
+        echo json_encode(['success' => false, 'error' => '難度與經驗值組合無效']);
+        exit();
+    }
+
+    // 準備 SQL 語句 - 加入用戶ID
+    $stmt = $pdo->prepare("INSERT INTO MISSION (MCATEGORY, MDESCRIPTION, MDIFFICULT, MGOAL_EXP, MUSER_ID, MCREATED_AT) VALUES (?, ?, ?, ?, ?, NOW())");
     
-    if ($stmt->execute([$MCATEGORY, $MDESCRIPTION, $MDIFFICULT, $MGOAL_EXP, $MGOAL_LEVEL])) {
-        echo json_encode(['success' => true, 'message' => 'Mission created successfully', 'mission_id' => $pdo->lastInsertId()]);
+    if ($stmt->execute([$MCATEGORY, $MDESCRIPTION, $MDIFFICULT, $MGOAL_EXP, $userId])) {
+        echo json_encode([
+            'success' => true, 
+            'message' => '任務創建成功', 
+            'mission_id' => $pdo->lastInsertId()
+        ]);
     } else {
-        echo json_encode(['success' => false, 'error' => 'Failed to insert mission']);
+        echo json_encode(['success' => false, 'error' => '任務創建失敗']);
     }
 
 } catch (Exception $e) {

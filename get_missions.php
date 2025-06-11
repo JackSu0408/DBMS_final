@@ -5,13 +5,29 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// 資料庫連線設定
+session_start();
 require_once 'db_config.php';
 
 try {
-    // 查詢任務資料
-    $stmt = $pdo->prepare("SELECT * FROM MISSION ORDER BY MCREATED_AT DESC");
-    $stmt->execute();
+    // 檢查用戶是否已登入
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'error' => '請先登入']);
+        exit();
+    }
+
+    $userId = $_SESSION['user_id'];
+    
+    // 查詢任務資料 - 只取得當前用戶的任務並檢查是否已完成
+    $stmt = $pdo->prepare("
+        SELECT 
+            m.*,
+            CASE WHEN mc.MCID IS NOT NULL THEN 1 ELSE 0 END as is_completed
+        FROM MISSION m
+        LEFT JOIN MISSION_COMPLETED mc ON m.MID = mc.MCMISSION_ID AND mc.MCUSER_ID = ?
+        WHERE m.MUSER_ID = ?
+        ORDER BY m.MCREATED_AT DESC
+    ");
+    $stmt->execute([$userId, $userId]);
     
     $missions = $stmt->fetchAll(PDO::FETCH_ASSOC);
     

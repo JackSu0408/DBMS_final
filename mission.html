@@ -91,13 +91,14 @@
                   <label class="block text-white text-sm font-medium mb-2">Difficulty</label>
                   <select
                     name="MDIFFICULT"
+                    id="difficulty-select"
                     required
                     class="w-full px-3 py-2 bg-[#2e4328] text-white rounded border border-[#416039] focus:border-[#50d22c] focus:outline-none"
                   >
                     <option value="">Select difficulty</option>
-                    <option value="Easy">Easy</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Hard">Hard</option>
+                    <option value="Easy" data-exp="5">Easy</option>
+                    <option value="Medium" data-exp="10">Medium</option>
+                    <option value="Hard" data-exp="20">Hard</option>
                   </select>
                 </div>
                 <div>
@@ -105,21 +106,12 @@
                   <input
                     type="number"
                     name="MGOAL_EXP"
+                    id="goal-exp-input"
                     required
                     min="1"
-                    class="w-full px-3 py-2 bg-[#2e4328] text-white rounded border border-[#416039] focus:border-[#50d22c] focus:outline-none"
-                    placeholder="Experience points to gain"
-                  />
-                </div>
-                <div>
-                  <label class="block text-white text-sm font-medium mb-2">Goal Level</label>
-                  <input
-                    type="number"
-                    name="MGOAL_LEVEL"
-                    required
-                    min="1"
-                    class="w-full px-3 py-2 bg-[#2e4328] text-white rounded border border-[#416039] focus:border-[#50d22c] focus:outline-none"
-                    placeholder="Target level"
+                    readonly
+                    class="w-full px-3 py-2 bg-[#2e4328] text-white rounded border border-[#416039] focus:border-[#50d22c] focus:outline-none opacity-75"
+                    placeholder="Will be set automatically"
                   />
                 </div>
               </div>
@@ -151,6 +143,20 @@
       const createMissionForm = document.getElementById('create-mission-form');
       const cancelBtn = document.getElementById('cancel-btn');
       const missionsListContainer = document.getElementById('missions-list');
+      const difficultySelect = document.getElementById('difficulty-select');
+      const goalExpInput = document.getElementById('goal-exp-input');
+
+      // 難度與經驗值綁定
+      difficultySelect.addEventListener('change', function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const expValue = selectedOption.getAttribute('data-exp');
+        
+        if (expValue) {
+          goalExpInput.value = expValue;
+        } else {
+          goalExpInput.value = '';
+        }
+      });
 
       // 顯示創建任務 Modal
       createMissionBtn.addEventListener('click', () => {
@@ -161,6 +167,7 @@
       cancelBtn.addEventListener('click', () => {
         createMissionModal.style.display = 'none';
         createMissionForm.reset();
+        goalExpInput.value = '';
       });
 
       // 點擊背景關閉 Modal
@@ -168,6 +175,7 @@
         if (e.target === createMissionModal) {
           createMissionModal.style.display = 'none';
           createMissionForm.reset();
+          goalExpInput.value = '';
         }
       });
 
@@ -192,7 +200,8 @@
             alert('任務創建成功！');
             createMissionModal.style.display = 'none';
             createMissionForm.reset();
-            loadMissions(); // 重新載入任務列表
+            goalExpInput.value = '';
+            loadMissions();
           } else {
             alert('創建失敗: ' + (result.error || '未知錯誤'));
           }
@@ -216,24 +225,39 @@
             missionsListContainer.innerHTML = '';
             if (missions && missions.length > 0) {
               missions.forEach(mission => {
+                const isCompleted = mission.is_completed == 1;
                 const missionDiv = document.createElement('div');
-                missionDiv.className = "flex items-center gap-4 bg-[#162013] px-4 min-h-[72px] py-2 justify-between";
+                
+                // 根據完成狀態設定不同的樣式
+                missionDiv.className = `flex items-center gap-4 bg-[#162013] px-4 min-h-[72px] py-2 justify-between ${isCompleted ? 'opacity-60' : ''}`;
+                
                 missionDiv.innerHTML = `
                   <div class="flex flex-col justify-center">
-                    <p class="text-white text-base font-medium leading-normal line-clamp-1">${mission.MCATEGORY}</p>
-                    <p class="text-[#a1c398] text-sm font-normal leading-normal line-clamp-2">${mission.MDIFFICULT}</p>
-                    <p class="text-[#8a9c87] text-xs font-normal leading-normal">${mission.MDESCRIPTION}</p>
+                    <p class="text-white text-base font-medium leading-normal line-clamp-1 ${isCompleted ? 'line-through text-gray-400' : ''}">${mission.MCATEGORY}</p>
+                    <p class="text-[#a1c398] text-sm font-normal leading-normal line-clamp-2 ${isCompleted ? 'line-through text-gray-500' : ''}">${mission.MDIFFICULT} (${mission.MGOAL_EXP} EXP)</p>
+                    <p class="text-[#8a9c87] text-xs font-normal leading-normal ${isCompleted ? 'line-through text-gray-600' : ''}">${mission.MDESCRIPTION}</p>
+                    ${isCompleted ? '<p class="text-[#50d22c] text-xs font-semibold mt-1">✓ 已完成</p>' : ''}
                   </div>
                   <div class="shrink-0">
                     <div class="flex size-7 items-center justify-center">
                       <input
                         type="checkbox"
-                        class="h-5 w-5 rounded border-[#416039] border-2 bg-transparent text-[#50d22c] checked:bg-[#50d22c] checked:border-[#50d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#416039] focus:outline-none"
+                        data-mission-id="${mission.MID}"
+                        data-mission-exp="${mission.MGOAL_EXP}"
+                        data-mission-name="${mission.MCATEGORY}"
+                        ${isCompleted ? 'checked disabled' : ''}
+                        class="mission-checkbox h-5 w-5 rounded border-[#416039] border-2 bg-transparent text-[#50d22c] checked:bg-[#50d22c] checked:border-[#50d22c] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#416039] focus:outline-none ${isCompleted ? 'cursor-not-allowed' : ''}"
                       />
                     </div>
                   </div>
                 `;
                 missionsListContainer.appendChild(missionDiv);
+              });
+
+              // 為所有未完成的任務打勾框添加事件監聽器
+              const checkboxes = document.querySelectorAll('.mission-checkbox:not([disabled])');
+              checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', handleMissionComplete);
               });
             } else {
               missionsListContainer.innerHTML = '<p class="text-white text-center py-8">尚無任務，請創建新任務</p>';
@@ -242,6 +266,267 @@
           .catch(error => {
             console.error('Error loading missions:', error);
           });
+      }
+
+      // 處理任務完成
+      function handleMissionComplete(event) {
+        const checkbox = event.target;
+        const missionId = checkbox.getAttribute('data-mission-id');
+        const missionExp = checkbox.getAttribute('data-mission-exp');
+        const missionName = checkbox.getAttribute('data-mission-name');
+
+        if (checkbox.checked) {
+          // 確認對話框
+          if (confirm(`確定要完成任務「${missionName}」嗎？\n您將獲得 ${missionExp} 經驗值。`)) {
+            completeMission(missionId, missionExp, missionName, checkbox);
+          } else {
+            // 取消勾選
+            checkbox.checked = false;
+          }
+        }
+      }
+
+      // 完成任務並更新經驗值
+      function completeMission(missionId, exp, missionName, checkbox) {
+        // 禁用復選框防止重複點擊
+        checkbox.disabled = true;
+        
+        fetch('complete_mission.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            mission_id: missionId,
+            exp_gained: parseInt(exp)
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // 檢查是否有升級
+            if (data.level_up) {
+              // 顯示升級慶祝動畫
+              showLevelUpCelebration(
+                data.old_level, 
+                data.new_level, 
+                data.new_title, 
+                data.exp_gained, 
+                missionName,
+                data.current_exp,
+                data.new_exp
+              );
+            } else {
+              // 普通完成任務提示
+              showMissionCompleteNotification(missionName, data.exp_gained, data.new_exp);
+            }
+            
+            // 重新載入任務列表以更新顯示狀態
+            loadMissions();
+          } else {
+            alert('完成任務失敗: ' + data.error);
+            checkbox.checked = false;
+            checkbox.disabled = false;
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('發生錯誤，請稍後再試');
+          checkbox.checked = false;
+          checkbox.disabled = false;
+        });
+      }
+
+      // 顯示任務完成通知（無升級）
+      function showMissionCompleteNotification(missionName, expGained, newTotalExp) {
+        const notification = document.createElement('div');
+        notification.className = 'fixed top-4 right-4 bg-gradient-to-r from-[#2e4328] to-[#416039] text-white p-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
+        notification.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="text-xl">✅</div>
+            <div>
+              <h3 class="font-bold">任務完成！</h3>
+              <p class="text-sm">${missionName}</p>
+              <p class="text-[#53d22c] text-sm font-semibold">+${expGained} EXP</p>
+              <p class="text-[#a1c398] text-xs">總經驗值: ${newTotalExp}</p>
+            </div>
+          </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // 3秒后自動移除
+        setTimeout(() => {
+          notification.style.opacity = '0';
+          notification.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+            if (document.body.contains(notification)) {
+              document.body.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+      }
+
+      // 顯示升級慶祝動畫
+      function showLevelUpCelebration(oldLevel, newLevel, newTitle, expGained, missionName, oldExp, newExp) {
+        // 創建全屏覆蓋層
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[100]';
+        
+        // 創建慶祝內容
+        const celebrationContent = document.createElement('div');
+        celebrationContent.className = 'text-center transform scale-0 transition-all duration-500';
+        celebrationContent.innerHTML = `
+          <div class="mb-8">
+            <!-- 升級特效 -->
+            <div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-600 mb-4 animate-pulse">
+              LEVEL UP!
+            </div>
+            
+            <!-- 等級變化 -->
+            <div class="flex items-center justify-center gap-6 mb-6">
+              <div class="text-center">
+                <div class="text-xl font-bold text-gray-300 mb-2">舊等級</div>
+                <div class="text-4xl font-bold text-[#a2c398] bg-[#2e4328] rounded-full w-20 h-20 flex items-center justify-center mx-auto border-2 border-[#416039]">
+                  ${oldLevel}
+                </div>
+              </div>
+              
+              <div class="text-4xl text-[#53d22c] animate-pulse">➜</div>
+              
+              <div class="text-center">
+                <div class="text-xl font-bold text-yellow-300 mb-2">新等級</div>
+                <div class="text-4xl font-bold text-yellow-900 bg-gradient-to-r from-yellow-400 to-yellow-200 rounded-full w-20 h-20 flex items-center justify-center mx-auto shadow-lg shadow-yellow-500/50 border-2 border-yellow-400 animate-pulse">
+                  ${newLevel}
+                </div>
+              </div>
+            </div>
+            
+            <!-- 經驗值變化 -->
+            <div class="mb-6 bg-[#1a2817] rounded-lg p-4 border border-[#416039]">
+              <div class="text-lg font-semibold text-[#53d22c] mb-2">經驗值變化</div>
+              <div class="flex items-center justify-center gap-2 text-white">
+                <span>${oldExp} EXP</span>
+                <span class="text-[#53d22c]">+${expGained}</span>
+                <span class="text-[#53d22c]">→</span>
+                <span class="text-yellow-300 font-bold">${newExp} EXP</span>
+              </div>
+            </div>
+            
+            <!-- 任務完成資訊 -->
+            <div class="text-white/90 mb-8 bg-[#162013] rounded-lg p-4 border border-[#2e4328]">
+              <div class="text-lg mb-2">✅ 完成任務</div>
+              <div class="text-xl font-semibold text-[#53d22c] mb-1">${missionName}</div>
+              <div class="text-lg text-yellow-300">🌟 獲得 ${expGained} 經驗值</div>
+            </div>
+            
+            <!-- 關閉按鈕 -->
+            <button class="bg-gradient-to-r from-[#53d22c] to-[#8cd279] text-[#0f1a0d] px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg hover:shadow-[#53d22c]/50 transition-all duration-300 transform hover:scale-105 border-2 border-[#53d22c]">
+              🎉 太棒了！繼續加油！ 🎉
+            </button>
+          </div>
+        `;
+        
+        overlay.appendChild(celebrationContent);
+        document.body.appendChild(overlay);
+        
+        // 添加粒子特效
+        createParticleEffect(overlay);
+        
+        // 播放升級音效（可選）
+        playLevelUpSound();
+        
+        // 觸發動畫
+        setTimeout(() => {
+          celebrationContent.style.transform = 'scale(1)';
+        }, 100);
+        
+        // 點擊關閉
+        const closeButton = celebrationContent.querySelector('button');
+        closeButton.addEventListener('click', () => {
+          celebrationContent.style.transform = 'scale(0)';
+          overlay.style.opacity = '0';
+          setTimeout(() => {
+            if (document.body.contains(overlay)) {
+              document.body.removeChild(overlay);
+            }
+          }, 500);
+        });
+        
+        // 12秒後自動關閉
+        setTimeout(() => {
+          if (document.body.contains(overlay)) {
+            closeButton.click();
+          }
+        }, 12000);
+      }
+
+      // 播放升級音效（可選功能）
+      function playLevelUpSound() {
+        // 如果有音效文件，可以在這裡播放
+        // const audio = new Audio('sounds/levelup.mp3');
+        // audio.play().catch(e => console.log('無法播放音效:', e));
+      }
+
+      // 創建粒子特效
+      function createParticleEffect(container) {
+        const particles = [];
+        const particleCount = 60;
+        const colors = ['#fbbf24', '#f59e0b', '#d97706', '#53d22c', '#8cd279'];
+        
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          const color = colors[Math.floor(Math.random() * colors.length)];
+          const size = Math.random() * 6 + 2;
+          
+          particle.className = 'absolute rounded-full opacity-80';
+          particle.style.width = size + 'px';
+          particle.style.height = size + 'px';
+          particle.style.backgroundColor = color;
+          particle.style.left = Math.random() * window.innerWidth + 'px';
+          particle.style.top = Math.random() * window.innerHeight + 'px';
+          particle.style.animation = `particle-float ${3 + Math.random() * 4}s infinite linear`;
+          particle.style.boxShadow = `0 0 ${size}px ${color}`;
+          
+          container.appendChild(particle);
+          particles.push(particle);
+        }
+        
+        // 添加粒子動畫CSS
+        if (!document.getElementById('particle-styles')) {
+          const style = document.createElement('style');
+          style.id = 'particle-styles';
+          style.textContent = `
+            @keyframes particle-float {
+              0% { 
+                transform: translateY(0px) rotate(0deg) scale(0); 
+                opacity: 0; 
+              }
+              10% {
+                opacity: 1;
+                transform: translateY(-10px) rotate(36deg) scale(1);
+              }
+              90% {
+                opacity: 1;
+                transform: translateY(-90vh) rotate(324deg) scale(1);
+              }
+              100% { 
+                transform: translateY(-100vh) rotate(360deg) scale(0); 
+                opacity: 0; 
+              }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        // 8秒後清理粒子
+        setTimeout(() => {
+          particles.forEach(particle => {
+            if (container.contains(particle)) {
+              container.removeChild(particle);
+            }
+          });
+        }, 8000);
       }
 
       // 頁面載入時載入任務
