@@ -2,6 +2,27 @@
 // 引入資料庫連線設定
 require_once 'db_config.php';
 
+// 電子郵件驗證函數
+function isValidEmail($email) {
+    $pattern = "/^[^@\s]+@[^@\s]+\.[^@\s]+$/";
+    $allowedDomains = [
+        "gmail.com",
+        "yahoo.com.tw",
+        "hotmail.com",
+        "outlook.com"
+    ];
+
+    if (!preg_match($pattern, $email)) {
+        return false;
+    }
+
+    $parts = explode("@", $email);
+    if (count($parts) != 2) return false;
+
+    $domain = strtolower($parts[1]);
+    return in_array($domain, $allowedDomains);
+}
+
 // 處理註冊表單提交
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_name = trim($_POST['username']);
@@ -13,18 +34,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (empty($user_name)) {
         $errors[] = "使用者名稱不能為空";
-    }
-    
-    if (empty($user_email)) {
+    }      if (empty($user_email)) {
         $errors[] = "電子郵件不能為空";
-    } elseif (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "電子郵件格式不正確";
+    } elseif (!isValidEmail($user_email)) {
+        $errors[] = "電子郵件格式錯誤或網域不被接受。僅接受 gmail.com, yahoo.com.tw, hotmail.com, outlook.com";
     }
     
     if (empty($user_password)) {
         $errors[] = "密碼不能為空";
-    } elseif (strlen($user_password) < 6) {
-        $errors[] = "密碼長度至少需要6個字元";
+    } elseif (strlen($user_password) < 8) {
+        $errors[] = "密碼長度至少需要8個字元";
     }
     
     // 檢查電子郵件是否已存在
@@ -48,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute([$user_name, $user_email, $salt . ':' . $hashed_password]);
             
             // 註冊成功，重導向到登入頁面
-            header("Location: index.html?success=1");
+            header("Location: Home.html?success=1");
             exit();
             
         } catch(PDOException $e) {

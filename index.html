@@ -1,6 +1,8 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
         href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" />
@@ -20,32 +22,38 @@
                 <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Life is an RPG</h2>
             </header>
             <div class="flex flex-1 justify-center items-center py-5">
-                <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5">
-                    <h2
+                <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5">                    <h2
                         class="text-white tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">
                         Welcome Back</h2>
-                    <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3 items-center">
-                        <label class="flex flex-col w-full flex-1 ">
-                            <p class="text-white text-base font-medium leading-normal pb-2">User Email</p>
-                            <input placeholder="Enter your email"
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#445c3d] bg-[#222e1f] focus:border-[#445c3d] h-14 placeholder:text-[#a4be9d] p-[15px] text-base font-normal leading-normal"
-                                value="" />
-                        </label>
-                    </div>
-                    <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                        <label class="flex flex-col min-w-40 flex-1">
-                            <p class="text-white text-base font-medium leading-normal pb-2">User Password</p>
-                            <input placeholder="Enter your password"
-                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#445c3d] bg-[#222e1f] focus:border-[#445c3d] h-14 placeholder:text-[#a4be9d] p-[15px] text-base font-normal leading-normal"
-                                value="" />
-                        </label>
-                    </div>
-                    <div class="flex px-4 py-3 mt-10">
-                        <button
-                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#8cd279] text-[#171f14] text-sm font-bold leading-normal tracking-[0.015em]">
-                            <span class="truncate">Log In</span>
-                        </button>
-                    </div>
+                    
+                    <!-- 顯示錯誤或成功訊息 -->
+                    <div id="error-message" class="mx-4 mb-4 p-3 bg-red-500 text-white rounded-lg" style="display: none;"></div>
+                    <div id="success-message" class="mx-4 mb-4 p-3 bg-green-500 text-white rounded-lg" style="display: none;"></div>
+                    
+                    <form method="POST" action="login_process.php">
+                        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3 items-center">
+                            <label class="flex flex-col w-full flex-1 ">
+                                <p class="text-white text-base font-medium leading-normal pb-2">User Email</p>
+                                <input name="email" type="email" placeholder="Enter your email" required
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#445c3d] bg-[#222e1f] focus:border-[#445c3d] h-14 placeholder:text-[#a4be9d] p-[15px] text-base font-normal leading-normal"
+                                    value="" />
+                            </label>
+                        </div>
+                        <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                            <label class="flex flex-col min-w-40 flex-1">
+                                <p class="text-white text-base font-medium leading-normal pb-2">User Password</p>
+                                <input name="password" type="password" placeholder="Enter your password" required
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#445c3d] bg-[#222e1f] focus:border-[#445c3d] h-14 placeholder:text-[#a4be9d] p-[15px] text-base font-normal leading-normal"
+                                    value="" />
+                            </label>
+                        </div>
+                        <div class="flex px-4 py-3 mt-10">
+                            <button type="submit"
+                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#8cd279] text-[#171f14] text-sm font-bold leading-normal tracking-[0.015em]">
+                                <span class="truncate">Log In</span>
+                            </button>
+                        </div>
+                    </form>
                     <div class="flex px-4 py-3">
                         <a href="register.html"
                             class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 flex-1 bg-[#8cd279] text-[#171f14] text-sm font-bold leading-normal tracking-[0.015em]">
@@ -56,9 +64,29 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>        </div>
     </div>
+
+    <script>
+        // 檢查 URL 中是否有錯誤或成功訊息
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const success = urlParams.get('success');
+        
+        if (error) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = decodeURIComponent(error);
+            errorDiv.style.display = 'block';
+        }
+        
+        if (success) {
+            const successDiv = document.getElementById('success-message');
+            if (success === '1') {
+                successDiv.textContent = '註冊成功！請登入您的帳戶。';
+            }
+            successDiv.style.display = 'block';
+        }
+    </script>
 </body>
 
 </html>

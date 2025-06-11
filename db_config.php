@@ -1,6 +1,9 @@
 <?php
+// 設定檔案編碼為 UTF-8
+header('Content-Type: text/html; charset=utf-8');
+
 // 資料庫連線設定
-$host = 'localhost';
+$host = '172.28.151.220';
 $dbname = 'rpg_project';
 $username = 'Qian';  // 請改成你的資料庫使用者名稱
 $password = 'admin0102';      // 請改成你的資料庫密碼
