@@ -22,81 +22,226 @@
                 fetch('header.html')
                     .then(response => response.text())
                     .then(data => document.getElementById('header').innerHTML = data);
-            </script>
-            <div class="px-40 flex flex-1 justify-center py-5">
+            </script>            <div class="px-40 flex flex-1 justify-center py-5">
                 <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-                    <div class="flex p-4 @container">
-                        <div class="flex w-full flex-col gap-4 items-center">
-                            <div class="flex gap-4 flex-col items-center">
-                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
+                    <!-- 用戶資訊區塊 - 加大版面 -->
+                    <div class="flex p-8 @container bg-gradient-to-br from-[#1a2518] to-[#0f1a0d] rounded-xl mb-6">
+                        <div class="flex w-full flex-col gap-6 items-center">
+                            <div class="flex gap-8 flex-col items-center">
+                                <!-- 用戶頭像 - 加大 -->
+                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-40 w-40 border-4 border-[#53d22c]"
                                     style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA54L7R7Y0gXUkQ8M70oiVYCX6ZKKnjERJUng08JX_7kR2r8Ojf9wFQYTbuFBYb2jK8pRHsEToU3hgxz3lpZwLALpikURh5qrk3GlxPlh-aKjbrC5d0ayQRguM2g9LAjsBSVEy0liB97lHNlDL3wnCgizI7_oChhVHTxTPaboUVXDNZoBUKpH09zcd16ciZ60SnpIV80NvjWPGkjwwcGzqB-ihgnRyqoJaKxErEkCJGUEYGFWUgVAHmyQbdZ1phs_7ievGiyehuAT5w");'>
                                 </div>
-                                <div class="flex flex-col items-center justify-center justify-center">
-                                    <p
-                                        class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] text-center">
-                                        Sarah Chen</p>
-                                    <p class="text-[#a2c398] text-base font-normal leading-normal text-center">Level 5
-                                        Adventurer</p>
-                                    <p class="text-[#a2c398] text-base font-normal leading-normal text-center">1200 /
-                                        2000 XP</p>
+                                
+                                <!-- 用戶資訊 -->
+                                <div class="flex flex-col items-center justify-center gap-3">
+                                    <!-- 用戶名稱 -->
+                                    <p id="username"
+                                        class="text-white text-[32px] font-bold leading-tight tracking-[-0.015em] text-center">
+                                        載入中...</p>
+                                    
+                                    <!-- 目前等級 -->
+                                    <p id="level-title" class="text-[#53d22c] text-xl font-semibold leading-normal text-center">載入中...</p>
+                                    
+                                    <!-- 經驗值資訊 -->
+                                    <p id="exp-info" class="text-[#a2c398] text-lg font-normal leading-normal text-center">載入中...</p>
+                                    
+                                    <!-- 經驗值進度條 -->                                    <div class="w-80 bg-[#426039] rounded-full h-4 mt-2">
+                                        <div id="exp-progress-bar" class="bg-gradient-to-r from-[#53d22c] to-[#8cd279] h-4 rounded-full transition-all duration-500" style="width: 0%;"></div>
+                                    </div>
+                                    <p id="exp-percentage" class="text-[#a2c398] text-sm font-normal">0%</p>
+                                    
+                                    <!-- 測試按鈕 - 增加經驗值 -->
+                                    <div class="flex gap-2 mt-4">
+                                        <button onclick="addExp(100)" class="bg-[#53d22c] text-[#0f1a0d] px-4 py-2 rounded-lg font-semibold hover:bg-[#8cd279] transition-colors">
+                                            +100 EXP
+                                        </button>
+                                        <button onclick="addExp(500)" class="bg-[#53d22c] text-[#0f1a0d] px-4 py-2 rounded-lg font-semibold hover:bg-[#8cd279] transition-colors">
+                                            +500 EXP
+                                        </button>                                        <button onclick="refreshUserInfo()" class="bg-[#426039] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#53d22c] hover:text-[#0f1a0d] transition-colors">
+                                            刷新
+                                        </button>                                        <button onclick="debugSession()" class="bg-[#7a4d1b] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#a66b2a] transition-colors">
+                                            調試
+                                        </button>
+                                        <button onclick="testDatabase()" class="bg-[#a66b2a] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#d4823d] transition-colors">
+                                            測試資料庫
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-3 p-4">
-                        <div class="flex gap-6 justify-between">
-                            <p class="text-white text-base font-medium leading-normal">Monster Slaying Progress</p>
-                            <p class="text-white text-sm font-normal leading-normal">60%</p>
-                        </div>
-                        <div class="rounded bg-[#426039]">
-                            <div class="h-2 rounded bg-[#53d22c]" style="width: 60%;"></div>
-                        </div>
-                    </div>
-                    <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Titles
-                        Earned</h2>
-                    <div class="flex gap-3 p-3 flex-wrap pr-4">
-                        <div
-                            class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
-                            <p class="text-white text-sm font-medium leading-normal">Dragon Slayer</p>
-                        </div>
-                        <div
-                            class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
-                            <p class="text-white text-sm font-medium leading-normal">Quest Master</p>
-                        </div>
-                        <div
-                            class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#2e4328] pl-4 pr-4">
-                            <p class="text-white text-sm font-medium leading-normal">Daily Hero</p>
-                        </div>
+                        </div>                    </div>
+                    
+                    <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Titles Earned</h2>
+                    <div id="titles-container" class="flex gap-3 p-3 flex-wrap pr-4">
+                        <p class="text-[#a2c398] text-sm">載入中...</p>
                     </div>
                     <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Stats
-                    </h2>
-                    <div class="flex flex-wrap gap-3 px-4 py-3">
+                    </h2>                    <div class="flex flex-wrap gap-3 px-4 py-3">
                         <div
                             class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
-                            <p class="text-white tracking-light text-2xl font-bold leading-tight">50</p>
+                            <p id="missions-completed" class="text-white tracking-light text-2xl font-bold leading-tight">載入中...</p>
                             <div class="flex items-center gap-2">
                                 <p class="text-[#a2c398] text-sm font-normal leading-normal">Missions Completed</p>
                             </div>
-                        </div>
-                        <div
+                        </div>                        <div
                             class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
-                            <p class="text-white tracking-light text-2xl font-bold leading-tight">20</p>
+                            <p id="total-missions" class="text-white tracking-light text-2xl font-bold leading-tight">載入中...</p>
                             <div class="flex items-center gap-2">
-                                <p class="text-[#a2c398] text-sm font-normal leading-normal">Quests Accepted</p>
+                                <p class="text-[#a2c398] text-sm font-normal leading-normal">Total Missions</p>
                             </div>
                         </div>
                         <div
                             class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#426039] p-3 items-center text-center">
-                            <p class="text-white tracking-light text-2xl font-bold leading-tight">100</p>
+                            <p id="days-active" class="text-white tracking-light text-2xl font-bold leading-tight">載入中...</p>
                             <div class="flex items-center gap-2">
                                 <p class="text-[#a2c398] text-sm font-normal leading-normal">Days Active</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </div>        </div>
+    </div>    <script>        // 載入用戶資訊
+        function loadUserInfo() {
+            console.log('開始載入用戶資訊...');
+            
+            fetch('get_user_info.php')
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('收到資料:', data);
+                    
+                    if (data.success) {
+                        const user = data.user;
+                        
+                        // 更新用戶資訊
+                        document.getElementById('username').textContent = user.username;
+                        document.getElementById('level-title').textContent = user.level_title;
+                        // 更新經驗值資訊
+                        const expInfo = document.getElementById('exp-info');
+                        if (user.exp_progress >= 100) {
+                            expInfo.textContent = `${user.current_exp} EXP (最高等級)`;
+                        } else {
+                            expInfo.textContent = `${user.current_exp} / ${user.next_level_exp} EXP`;
+                        }
+                        
+                        // 更新經驗值進度條
+                        const progressBar = document.getElementById('exp-progress-bar');
+                        const progressPercentage = document.getElementById('exp-percentage');
+                        progressBar.style.width = user.exp_progress + '%';
+                        progressPercentage.textContent = user.exp_progress + '%';
+                          // 更新已獲得稱號
+                        const titlesContainer = document.getElementById('titles-container');
+                        if (user.earned_titles && user.earned_titles.length > 0) {
+                            titlesContainer.innerHTML = '';
+                            user.earned_titles.forEach(title => {
+                                const titleElement = document.createElement('div');
+                                titleElement.className = 'flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#2e4328] p-3 border border-[#53d22c]';
+                                titleElement.innerHTML = `
+                                    <img src="source/${title.LTTITLE_PICTURE}" alt="${title.LTLEVEL_NAME}" class="w-6 h-6">
+                                    <p class="text-white text-sm font-medium leading-normal">${title.LTLEVEL_NAME}</p>
+                                `;
+                                titlesContainer.appendChild(titleElement);
+                            });
+                        } else {
+                            titlesContainer.innerHTML = '<p class="text-[#a2c398] text-sm">尚未獲得任何稱號</p>';
+                        }
+                        
+                        // 更新統計資料
+                        document.getElementById('missions-completed').textContent = user.missions_completed;
+                        document.getElementById('total-missions').textContent = user.total_missions;
+                        document.getElementById('days-active').textContent = user.days_active;
+                        
+                        console.log('用戶資訊載入成功:', user);                    } else {
+                        console.error('載入用戶資訊失敗:', data);
+                        
+                        // 顯示錯誤資訊到頁面
+                        document.getElementById('username').textContent = '載入失敗: ' + data.error;
+                        document.getElementById('level-title').textContent = '錯誤';
+                        document.getElementById('exp-info').textContent = '錯誤';
+                        
+                        // 如果有調試資訊，顯示在控制台
+                        if (data.debug) {
+                            console.log('調試資訊:', data.debug);
+                        }
+                        
+                        // 如果需要重新導向到登入頁面
+                        if (data.redirect) {
+                            alert(data.error);
+                            window.location.href = data.redirect;
+                        }
+                    }
+                })                .catch(error => {
+                    console.error('網路錯誤:', error);
+                    document.getElementById('username').textContent = '網路錯誤';
+                    document.getElementById('level-title').textContent = '錯誤';
+                    document.getElementById('exp-info').textContent = '錯誤';
+                });
+        }        // 頁面載入完成後執行
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserInfo();
+        });
+        
+        // 增加經驗值函數（測試用）
+        function addExp(amount) {
+            fetch('update_exp.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    exp_amount: amount
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log(data.message);
+                    // 重新載入用戶資訊以更新顯示
+                    loadUserInfo();
+                } else {
+                    console.error('增加經驗值失敗:', data.error);
+                    alert(data.error);
+                }
+            })
+            .catch(error => {
+                console.error('網路錯誤:', error);
+                alert('網路錯誤，請稍後再試');
+            });
+        }
+          // 刷新用戶資訊
+        function refreshUserInfo() {
+            loadUserInfo();
+        }
+          // 調試 session 狀態
+        function debugSession() {
+            fetch('debug_session.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Session 調試資訊:', data);
+                    alert('Session 調試資訊:\n' + JSON.stringify(data, null, 2));
+                })
+                .catch(error => {
+                    console.error('調試錯誤:', error);
+                    alert('調試錯誤: ' + error.message);
+                });
+        }
+        
+        // 測試資料庫狀態
+        function testDatabase() {
+            fetch('test_database.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('資料庫測試結果:', data);
+                    alert('資料庫測試結果:\n' + JSON.stringify(data, null, 2));
+                })
+                .catch(error => {
+                    console.error('資料庫測試錯誤:', error);
+                    alert('資料庫測試錯誤: ' + error.message);
+                });
+        }
+    </script>
 </body>
 
 </html>
